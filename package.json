@@ -1,0 +1,23 @@
+{
+  "name": "cod-bot-wz2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddzik19/cod-bot-wz2.git"
+  },
+  "author": "Damian Dzik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ddzik19/cod-bot-wz2/issues"
+  },
+  "homepage": "https://github.com/ddzik19/cod-bot-wz2#readme",
+  "dependencies": {
+    "discord.js": "^14.5.0",
+    "dotenv": "^16.0.3"
+  }
+}
