@@ -54,16 +54,17 @@ client.on("messageCreate", (msg) => {
 	// check if the message author is the bot or does the message start with a prefix
 	if (msg.author.bot || !msg.content.startsWith(prefix)) return;
 
-	try {
-		// listing all the viable guns
-		if (command === "!cod") {
-			console.log(args[1])
-			// if the command is cod then get arg[1] and check if command exists
-			client.commands.get(args[1].toLowerCase()).execute(msg);
-		}
-	} catch (error) {
-		msg.channel.send("Type !cod.help in chat to see all the commands.");
+	if (command === "!cod") {
+		client.commands.get(args[1].toLowerCase()).execute(msg);
 	}
+
+	// try {
+	// 	if (command === "!cod") {
+	// 		client.commands.get(args[1].toLowerCase()).execute(msg);
+	// 	}
+	// } catch (error) {
+	// 	msg.channel.send("Type !cod.help in chat to see all the commands.");
+	// }
 });
 
 (async () => {
