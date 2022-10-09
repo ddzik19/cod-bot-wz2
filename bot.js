@@ -55,7 +55,12 @@ client.on("messageCreate", (msg) => {
 	if (msg.author.bot || !msg.content.startsWith(prefix)) return;
 
 	if (command === "!cod") {
-		client.commands.get(args[1].toLowerCase()).execute(msg);
+		if(args.length > 1){
+			client.commands.get(args[1].toLowerCase()).execute(msg, args[2]);
+			return
+		}else{
+			client.commands.get(args[1].toLowerCase()).execute(msg);
+		}
 	}
 
 	// try {
