@@ -13,7 +13,7 @@ const dirs = fs.readdirSync(path).filter(function (file) {
 const getGunsArray = (game_name) => {
 	let gun_array = [];
 	let guns_items = fs
-		.readdirSync(`${path}/${game_name}`)
+		.readdirSync(`${path}/${game_name}/`)
 		.filter((file) => file.endsWith(".png"));
 	guns_items.map((item) => {
 		var gun_object = item.split(".")[0];
@@ -26,36 +26,35 @@ const getGunsArray = (game_name) => {
 	return gun_array;
 };
 
-let gunArray = [];
-dirs.map((dir) => {
-	if (dir == "mw") {
-		gunArray = getGunsArray("mw");
-	}
-	if (dir == "cw") {
-		gunArray = getGunsArray("cw");
-	}
-	if (dir == "mw") {
-		gunArray = getGunsArray("vg");
-	}
-});
-
-const get_weapons = () => {
+const get_fields = (array) => {
 	const fields = [];
-	gunArray.forEach((element) => {
+	array.forEach((element) => {
 		fields.push({
 			inline: true,
-			value: element.type,
-			name: element.name,
+			value: element.type.toUpperCase(),
+			name: element.name.toUpperCase(),
 		});
 	});
 	return fields;
 };
+
 module.exports = {
 	name: "wz",
 	execute(msg, game_name) {
-		const fields = get_weapons();
+		const guns = getGunsArray(game_name);
+		const fields = get_fields(guns);
+
+		let color = "";
+		if (game_name == "mw") {
+			color = "00D4FF";
+		} else if (game_name == "cw") {
+			color = "FF0000";
+		} else if (game_name == "vg") {
+			color = "FFFB00";
+		}
+
 		const newEmbed = new EmbedBuilder()
-			.setColor("00D4FF")
+			.setColor(color)
 			.setTitle(`Warzone: ${game_name.toUpperCase()}`)
 			.setFields(fields);
 		return msg.channel.send({
