@@ -56,7 +56,7 @@ client.on("messageCreate", (msg) => {
 
 	if (command === "!cod") {
 		if(args.length > 1){
-			client.commands.get(args[1].toLowerCase()).execute(msg, args[2]);
+			client.commands.get(args[1].toLowerCase()).execute(msg, args[2].toLowerCase());
 			return
 		}else{
 			client.commands.get(args[1].toLowerCase()).execute(msg);
