@@ -1,6 +1,6 @@
 /*
     Author: Damian Dzik
-    Desc: Embed with all  commands
+    Desc: Embed with all commands
 */
 const { EmbedBuilder } = require("discord.js");
 

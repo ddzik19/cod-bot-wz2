@@ -51,25 +51,20 @@ client.on("messageCreate", (msg) => {
 	const args = msg.content.trim().split(".");
 	const command = args[0].toLowerCase();
 
-	// check if the message author is the bot or does the message start with a prefix
 	if (msg.author.bot || !msg.content.startsWith(prefix)) return;
-
-	if (command === "!cod") {
-		if(args.length > 1){
-			client.commands.get(args[1].toLowerCase()).execute(msg, args[2].toLowerCase());
-			return
-		}else{
-			client.commands.get(args[1].toLowerCase()).execute(msg);
+	try {
+		if (command === "!cod") {
+			if (args.length == 2) {
+				client.commands.get(args[1].toLowerCase()).execute(msg);
+			} else if (args.length > 2) {
+				client.commands
+					.get(args[1].toLowerCase())
+					.execute(msg, args[2].toLowerCase());
+			}
 		}
+	} catch (error) {
+		msg.channel.send("Type !cod.help in chat to see all the commands.");
 	}
-
-	// try {
-	// 	if (command === "!cod") {
-	// 		client.commands.get(args[1].toLowerCase()).execute(msg);
-	// 	}
-	// } catch (error) {
-	// 	msg.channel.send("Type !cod.help in chat to see all the commands.");
-	// }
 });
 
 (async () => {
