@@ -52,19 +52,31 @@ client.on("messageCreate", (msg) => {
 	const command = args[0].toLowerCase();
 
 	if (msg.author.bot || !msg.content.startsWith(prefix)) return;
-	try {
-		if (command === "!cod") {
-			if (args.length == 2) {
-				client.commands.get(args[1].toLowerCase()).execute(msg);
-			} else if (args.length > 2) {
-				client.commands
-					.get(args[1].toLowerCase())
-					.execute(msg, args[2].toLowerCase());
-			}
+	if (command === "!cod") {
+		if (args.length == 2) {
+			client.commands.get(args[1].toLowerCase()).execute(msg);
+		} else if (args.length > 2) {
+			client.commands
+				.get(args[1].toLowerCase())
+				.execute(msg, args[2].toLowerCase());
 		}
-	} catch (error) {
-		msg.channel.send("Type !cod.help in chat to see all the commands.");
 	}
+	if (command === "!build") {
+		let noPrefixCmd = command.split("!")
+		client.commands
+			.get(noPrefixCmd[1].toLowerCase())
+			.execute(
+				msg,
+				args[1].toLowerCase(),
+				args[2].toLowerCase(),
+				args[3].toLowerCase()
+			);
+	}
+	// try {
+
+	// } catch (error) {
+	// 	msg.channel.send("Type !cod.help in chat to see all the commands.");
+	// }
 });
 
 (async () => {
