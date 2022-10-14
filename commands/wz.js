@@ -81,11 +81,17 @@ module.exports = {
 		const guns = getGunsArray(game_name);
 		const fields = get_fields(guns);
 		const embeds = createEmbeds(fields, game_name);
-		for (let i = 0; i < embeds.length; i++) {
-			msg.channel.send({
-				embeds: [embeds[i]],
+		if (embeds.length > 1) {
+			for (let i = 0; i < embeds.length; i++) {
+				msg.channel.send({
+					embeds: [embeds[i]],
+				});
+			}
+		} else {
+			return msg.channel.send({
+				embeds: [embeds],
 			});
 		}
-		return
+		return;
 	},
 };
