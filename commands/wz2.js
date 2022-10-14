@@ -1,6 +1,6 @@
 /*
     Author: Damian Dzik
-    Desc: Embed with all wz weapons
+    Desc: Embed with all wz2 weapons
 */
 const { EmbedBuilder } = require("discord.js");
 const fs = require("fs");

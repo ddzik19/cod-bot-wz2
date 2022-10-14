@@ -72,6 +72,16 @@ client.on("messageCreate", (msg) => {
 				args[3].toLowerCase()
 			);
 	}
+	if(command === "!list"){
+		let noPrefixCmd = command.split("!")
+		client.commands
+			.get(noPrefixCmd[1].toLowerCase())
+			.execute(
+				msg,
+				args[1].toLowerCase(),
+				args[2].toLowerCase(),
+			);
+	}
 	// try {
 
 	// } catch (error) {
