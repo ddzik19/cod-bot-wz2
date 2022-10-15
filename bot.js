@@ -1,16 +1,11 @@
 /** 
     Author: Damian Dzik
 **/
-//
-// TODO: remove all comments when bot is ready for production
-//
 require("dotenv").config();
 const Discord = require("discord.js");
 const {
 	Client,
 	GatewayIntentBits,
-	EmbedBuilder,
-	PermissionsBitField,
 } = require(`discord.js`);
 const client = new Client({
 	restTimeOffset: 0,
@@ -20,32 +15,33 @@ const client = new Client({
 		GatewayIntentBits.MessageContent,
 	],
 });
-// -------------------------------------------
-// creating a file sync reader to read files
 const fs = require("fs");
 
-// creating a new collection of commands
 client.commands = new Discord.Collection();
 
-// getting all command files
 const commandFiles = fs
 	.readdirSync("commands")
 	.filter((file) => file.endsWith(".js"));
 
-// looping through files in commands and adding the commands into a collection
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
-	// TODO: remove when out for production
-	console.log(client.commands);
 }
-// -------------------------------------------
+
+const helpCommands = []
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	helpCommands.push({
+		name: command.cmd,
+		value: command.description,
+		inline: false
+	})
+}
+
 client.on("ready", () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
-// commands
-// the prefix of each command
 const prefix = "!";
 client.on("messageCreate", (msg) => {
 	const args = msg.content.trim().split(".");
@@ -54,7 +50,11 @@ client.on("messageCreate", (msg) => {
 	if (msg.author.bot || !msg.content.startsWith(prefix)) return;
 	if (command === "!cod") {
 		if (args.length == 2) {
-			client.commands.get(args[1].toLowerCase()).execute(msg);
+			if(args[1] == "help"){
+				client.commands.get(args[1].toLowerCase()).execute(msg, helpCommands)
+			}else {
+				client.commands.get(args[1].toLowerCase()).execute(msg);
+			}
 		} else if (args.length > 2) {
 			client.commands
 				.get(args[1].toLowerCase())

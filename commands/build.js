@@ -39,6 +39,7 @@ module.exports = {
 	name: "build",
 	description:
 		"Display a specific gun build for a game. \n EXAMPLE: !build.wz.cw.mp5",
+	cmd:"!build.<wz/wz2>.<game_name>.<gun_name>",
 	execute(msg, wz_option, game_name, gun_name) {
 		const image = getGunImageUrl(wz_option, game_name, gun_name);
 		const attachment = new AttachmentBuilder(image[0]);
