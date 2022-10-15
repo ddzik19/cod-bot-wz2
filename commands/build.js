@@ -1,6 +1,11 @@
+/*
+    Author: Damian Dzik
+*/
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const fs = require("fs");
-
+const author = {
+	name: "DevDamo",
+};
 const getGunImageUrl = (wz_option, game_name, gun_name) => {
 	let images = fs
 		.readdirSync(`database/${wz_option}/${game_name}/`)
@@ -39,7 +44,7 @@ module.exports = {
 	name: "build",
 	description:
 		"Display a specific gun build for a game. \n EXAMPLE: !build.wz.cw.mp5",
-	cmd:"!build.<wz/wz2>.<game_name>.<gun_name>",
+	cmd: "!build.<wz/wz2>.<game_name>.<gun_name>",
 	execute(msg, wz_option, game_name, gun_name) {
 		const image = getGunImageUrl(wz_option, game_name, gun_name);
 		const attachment = new AttachmentBuilder(image[0]);
@@ -47,6 +52,7 @@ module.exports = {
 		const embed = new EmbedBuilder()
 			.setColor(color)
 			.setTitle(`Warzone: ${game_name.toUpperCase()}`)
+			.setAuthor(author)
 			.setDescription(gun_name)
 			.setImage((url = `attachment://${image[1]}`));
 		return msg.channel.send({

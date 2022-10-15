@@ -1,15 +1,15 @@
 /*
     Author: Damian Dzik
-    Desc: Embed with all wz weapons
 */
 const { EmbedBuilder } = require("discord.js");
 const fs = require("fs");
 
-// getting all command files
+const author = {
+	name: "DevDamo",
+};
+
 const path = "database/wz";
-// const dirs = fs.readdirSync(path).filter(function (file) {
-// 	return fs.statSync(`${path}/${file}`).isDirectory();
-// });
+
 const getGunsArray = (game_name) => {
 	let gun_array = [];
 	try {
@@ -49,6 +49,7 @@ const createEmbeds = (array, game_name) => {
 				let embed = new EmbedBuilder()
 					.setColor(color)
 					.setTitle(`Warzone: ${game_name.toUpperCase()}`)
+					.setAuthor(author)
 					.addFields(chunk);
 				embeds.push(embed);
 			}
@@ -58,6 +59,7 @@ const createEmbeds = (array, game_name) => {
 		let embed = new EmbedBuilder()
 			.setColor(color)
 			.setTitle(`Warzone: ${game_name.toUpperCase()}`)
+			.setAuthor(author)
 			.addFields(array);
 		return embed;
 	}
@@ -77,7 +79,8 @@ const get_fields = (array) => {
 
 module.exports = {
 	name: "wz",
-	description: "Displays all available guns builds for the specified game, \n [ mw, cw, vg ]",
+	description:
+		"Displays all available guns builds for the specified game, \n [ mw, cw, vg ]",
 	cmd: "!cod.wz.<game_name>",
 	execute(msg, game_name) {
 		const guns = getGunsArray(game_name);

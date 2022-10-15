@@ -1,33 +1,38 @@
 /*
     Author: Damian Dzik
-    Desc: Embed specific type of weapons for both warzone games
 */
+const author = {
+	name: "DevDamo",
+};
+
 const { EmbedBuilder } = require("discord.js");
 const fs = require("fs");
 
 const createEmbeds = (array, gun_type) => {
-	const pages = array.length / 25
-	let embeds = []
-	if(pages > 1){
+	const pages = array.length / 25;
+	let embeds = [];
+	if (pages > 1) {
 		for (let i = 0; i <= pages; i++) {
 			for (let j = 0; j < array.length; j + 25) {
 				let chunk = array.splice(j, j + 25);
 				let embed = new EmbedBuilder()
 					.setColor("Blurple")
 					.setTitle(`Warzone: ${gun_type.toUpperCase()} guns`)
+					.setAuthor(author)
 					.addFields(chunk);
 				embeds.push(embed);
 			}
 		}
-		return embeds
-	}else {
+		return embeds;
+	} else {
 		let embed = new EmbedBuilder()
 			.setColor("Blurple")
 			.setTitle(`Warzone: ${gun_type.toUpperCase()} guns`)
+			.setAuthor(author)
 			.addFields(array);
 		return embed;
 	}
-}
+};
 
 module.exports = {
 	name: "list",
@@ -50,13 +55,13 @@ module.exports = {
 					guns_to_display.push({
 						name: `${gun.split("_")[0]}`,
 						value: `${game}`,
-						inline: true
+						inline: true,
 					});
 				}
 			}
 		}
 
-		const embeds = createEmbeds(guns_to_display, gun_type)
+		const embeds = createEmbeds(guns_to_display, gun_type);
 		if (embeds.length > 1) {
 			for (let i = 0; i < embeds.length; i++) {
 				msg.channel.send({

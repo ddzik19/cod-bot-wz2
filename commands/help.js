@@ -1,17 +1,16 @@
 /*
     Author: Damian Dzik
-    Desc: Embed with all commands
 */
-const {
-	Client,
-	GatewayIntentBits,
-	EmbedBuilder,
-} = require(`discord.js`);
+const author = {
+	name: "DevDamo",
+};
+const { EmbedBuilder } = require(`discord.js`);
 const createEmbed = (fields) => {
 	const color = "a7fc00";
 	const embed = new EmbedBuilder()
 		.setColor(color)
 		.setTitle("Commands:")
+		.setAuthor(author)
 		.setFields(fields);
 	return embed;
 };
