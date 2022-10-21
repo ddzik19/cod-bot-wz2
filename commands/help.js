@@ -17,7 +17,7 @@ const createEmbed = (fields) => {
 
 module.exports = {
 	name: "help",
-	description: "Display all available commands for the bot.",
+	description: "Display all available commands",
 	cmd: "!cod.help",
 	execute(msg, fields) {
 		const embed = createEmbed(fields);
