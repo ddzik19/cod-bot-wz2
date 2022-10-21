@@ -37,7 +37,7 @@ const createEmbeds = (array, gun_type) => {
 module.exports = {
 	name: "list",
 	description:
-		"Display a specific gun build for a game. \n EXAMPLE: !build.wz.sr \n GUN TYPES: ar, smg, lmg, sr, mr ,ps, shg, tac",
+		"Display gun builds for specific gun type. \n EXAMPLE: !list.wz.sr \n GUN TYPES: ar, smg, lmg, sr, mr ,ps, shg, tac",
 	cmd: "!list.<wz/wz2>.<gun_type>",
 	execute(msg, wz_option, gun_type) {
 		const dir_result = fs.readdirSync(`database/${wz_option}`);
