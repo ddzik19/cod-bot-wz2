@@ -80,7 +80,7 @@ const get_fields = (array) => {
 module.exports = {
 	name: "wz",
 	description:
-		"Displays all available guns builds for the specified game, \n [ mw, cw, vg ]",
+		"Displays all available gun builds for the specified game, \n [ mw, cw, vg ]",
 	cmd: "!cod.wz.<game_name>",
 	execute(msg, game_name) {
 		const guns = getGunsArray(game_name);
